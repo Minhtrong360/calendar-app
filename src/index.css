@@ -88,6 +88,13 @@ button:focus-visible {
   :root {
     --radius: 0.5rem;
   }
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 }
 
 #react-day-picker-14 {
