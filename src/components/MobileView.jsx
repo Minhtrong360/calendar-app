@@ -84,13 +84,13 @@ export default function MobileView() {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-white">
+    <div className="w-[95vw] min-h-screen bg-white overflow-hidden">
       <div className="p-4 space-y-4">
         <Calendar
           mode="single"
           selected={date}
           onSelect={handleDateSelect}
-          className="rounded-lg border w-full"
+          className="rounded-lg border w-full max-w-full overflow-hidden"
           modifiers={{
             selected: (day) =>
               date && day.toDateString() === date.toDateString(),
