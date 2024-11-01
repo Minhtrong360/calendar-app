@@ -153,7 +153,7 @@ export default function DesktopView() {
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      <div className="md:w-[60vw] w-[100vw] mx-auto px-8 py-12 bg-white rounded-lg">
+      <div className="md:w-[70vw] w-[100vw] mx-auto bg-white rounded-lg">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <Button
@@ -229,9 +229,14 @@ export default function DesktopView() {
                 return (
                   <div
                     key={`${weekIndex}-${dayIndex}`}
-                    className={`min-h-[150px] p-2 border relative cursor-pointer flex flex-col items-center
+                    className={`min-h-[150px] p-2 border relative cursor-pointer
                       ${!isCurrentMonth ? "bg-gray-50 text-gray-400" : ""}
-                      ${dayEvents.length > 0 ? "bg-[#E4F6ED]" : ""}`}
+                      ${
+                        dayEvents.length > 0
+                          ? "bg-[#E4F6ED] hover:bg-[#d0f0e0] transition-colors"
+                          : "hover:bg-gray-50 transition-colors"
+                      }
+                    `}
                     onClick={() => {
                       // Tính toán tháng mới dựa trên ngày được chọn
                       let newMonth = currentDate.getMonth();
@@ -270,59 +275,66 @@ export default function DesktopView() {
                       }
                     }}
                   >
-                    <span
-                      className={`text-sm font-medium w-8 h-8 flex items-center justify-center ${
-                        isSelected ? "bg-[#0F4C81] rounded-full text-white" : ""
-                      }`}
-                    >
-                      {day}
-                    </span>
-                    <div className="w-full mt-2 space-y-1">
-                      {dayEvents.map((event, eventIndex) => (
-                        <div
-                          key={event.id || eventIndex}
-                          className="group relative cursor-pointer"
-                          onClick={(e) => handleEventClick(event, e)}
-                        >
+                    <div className="flex flex-col h-full w-full">
+                      <span
+                        className={`text-sm font-medium w-8 h-8 flex items-center justify-center self-center
+                          ${
+                            isSelected
+                              ? "bg-[#0F4C81] rounded-full text-white"
+                              : ""
+                          }`}
+                      >
+                        {day}
+                      </span>
+                      <div className="w-full mt-2 space-y-1 flex-grow">
+                        {dayEvents.map((event, eventIndex) => (
                           <div
-                            className={`h-6 px-2 rounded flex items-center space-x-2 hover:opacity-90 ${
-                              event.eventType === "Event"
-                                ? "bg-[#F9BE81]"
-                                : "bg-[#FFE4C8]"
-                            }`}
+                            key={event.id || eventIndex}
+                            className="group relative cursor-pointer"
+                            onClick={(e) => handleEventClick(event, e)}
                           >
                             <div
-                              className={`w-1.5 h-1.5 rounded-full ${
+                              className={`h-6 px-2 rounded flex items-center space-x-2 hover:opacity-90 ${
                                 event.eventType === "Event"
-                                  ? "bg-orange-600"
-                                  : "bg-blue-600"
+                                  ? "bg-[#F9BE81]"
+                                  : "bg-[#FFE4C8]"
                               }`}
-                            />
-                            <span className="text-xs truncate pr-1">
-                              {event.title}
-                            </span>
-                          </div>
-                          <div className="hidden group-hover:block absolute z-10 bg-white border rounded-lg p-2 shadow-lg mt-1 w-36">
-                            <div className="text-sm font-medium flex items-center justify-between">
-                              {event.title}
-                              {event.link && (
-                                <LinkIcon className="h-3 w-3 text-gray-500" />
-                              )}
+                            >
+                              <div
+                                className={`w-1.5 h-1.5 rounded-full ${
+                                  event.eventType === "Event"
+                                    ? "bg-orange-600"
+                                    : "bg-blue-600"
+                                }`}
+                              />
+                              <span className="text-xs truncate pr-1">
+                                {event.title}
+                              </span>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">
-                              <div>
-                                {event.startTime} - {event.endTime}
+                            <div className="hidden group-hover:block absolute z-10 bg-white border rounded-lg p-2 shadow-lg mt-1 w-36">
+                              <div className="text-sm font-medium flex items-center justify-between">
+                                {event.title}
+                                {event.link && (
+                                  <LinkIcon className="h-3 w-3 text-gray-500" />
+                                )}
                               </div>
-                              <div>{event.eventType}</div>
-                              <div>{event.location}</div>
-                              <div>Attendees: {event.attendees}</div>
-                              {event.description && (
-                                <div className="mt-1">{event.description}</div>
-                              )}
+                              <div className="text-xs text-gray-500 mt-1">
+                                <div>
+                                  {event.startTime} - {event.endTime}
+                                </div>
+                                <div>{event.eventType}</div>
+                                <div>{event.location}</div>
+                                <div>Attendees: {event.attendees}</div>
+                                {event.description && (
+                                  <div className="mt-1">
+                                    {event.description}
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   </div>
                 );
