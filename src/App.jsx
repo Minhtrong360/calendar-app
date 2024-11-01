@@ -12,12 +12,12 @@ function App() {
       {/* Content Container */}
       <div className="flex-1 w-full">
         {/* Mobile View (visible on sm screens and below) */}
-        <div className="sm:hidden w-screen">
+        <div className="sm:hidden w-screen flex justify-center items-center">
           <MobileView />
         </div>
 
         {/* Desktop View (visible on lg screens and above) */}
-        <div className="hidden sm:block w-full">
+        <div className="hidden sm:flex w-full justify-center items-center">
           <DesktopView />
         </div>
       </div>
